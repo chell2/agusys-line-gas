@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "lib": ["esnext"],
+        "experimentalDecorators": false,
+        "module": "commonjs",
+        "allowJs": true,
+        "outDir": "./dist",
+        "strict": true /* Enable all strict type-checking options. */,
+        "skipLibCheck": true
+    },
+    "include": ["src/**/*"]
+}

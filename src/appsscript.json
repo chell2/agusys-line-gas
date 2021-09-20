@@ -1,0 +1,18 @@
+{
+    "timeZone": "Asia/Tokyo",
+    "dependencies": {
+        "libraries": [
+            {
+                "userSymbol": "Dayjs",
+                "libraryId": "1ShsRhHc8tgPy5wGOzUvgEhOedJUQD53m-gd8lG2MOgs-dXC_aCZn9lFB",
+                "version": "1"
+            }
+        ]
+    },
+    "exceptionLogging": "STACKDRIVER",
+    "runtimeVersion": "V8",
+    "webapp": {
+        "access": "ANYONE_ANONYMOUS",
+        "executeAs": "USER_DEPLOYING"
+    }
+}
