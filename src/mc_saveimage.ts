@@ -1,11 +1,7 @@
-//getImage,saveImage
-
-//Blob形式で画像・動画を取得する
-function getImage(
-    CONTENT_END_POINT: string,
-    replyToken: string,
-    userID: string
-) {
+/*
+ * 画像・動画を取得（Blob形式）
+ */
+function getImage(CONTENT_END_POINT: any, replyToken: string, userID: string) {
     //ファイル名に使う現在日時をdayjsライブラリで取得
     var date = dayjs.dayjs();
     var formattedDate = date.format("YYYYMMDD_HHmmss");
@@ -33,7 +29,9 @@ function getImage(
     }
 }
 
-//画像・動画をGoogle Driveのフォルダーに保存する
+/*
+ * 画像・動画をGoogle Driveに保存
+ */
 function saveImage(
     imageBlob: GoogleAppsScript.Base.BlobSource,
     replyToken: string

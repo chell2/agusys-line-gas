@@ -21,16 +21,16 @@ function recordLocation(
         var fourthColumnSize = 250; // 4列目の列幅
         var fifthColumnSize = 250; // 5列目の列幅
 
-        sheet.setColumnWidth(1, firstColumnSize);
-        sheet.setColumnWidth(2, secondColumnSize);
-        sheet.setColumnWidth(3, thirdColumnSize);
-        sheet.setColumnWidth(4, fourthColumnSize);
-        sheet.setColumnWidth(5, fifthColumnSize);
+        sheet?.setColumnWidth(1, firstColumnSize);
+        sheet?.setColumnWidth(2, secondColumnSize);
+        sheet?.setColumnWidth(3, thirdColumnSize);
+        sheet?.setColumnWidth(4, fourthColumnSize);
+        sheet?.setColumnWidth(5, fifthColumnSize);
 
         // 送信された位置情報をスプレッドシートに記録
-        sheet.appendRow([new Date(), title, address, latitude, longitude]);
-        var range = sheet.getDataRange();
-        range.setHorizontalAlignment("left"); // 文字を左揃えに統一
+        sheet?.appendRow([new Date(), title, address, latitude, longitude]);
+        var range = sheet?.getDataRange();
+        range?.setHorizontalAlignment("left"); // 文字を左揃えに統一
 
         // メッセージを返す
         var successMessage = createMessage(
