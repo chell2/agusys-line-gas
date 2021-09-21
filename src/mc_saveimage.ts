@@ -1,11 +1,9 @@
-const Dayjs = require("dayjs");
-
 /*
  * 画像・動画を取得（Blob形式）
  */
 function getImage(CONTENT_END_POINT: any, replyToken: string, userID: string) {
     //ファイル名に使う現在日時をdayjsライブラリで取得
-    var date = Dayjs.dayjs();
+    var date = dayjs.dayjs();
     var formattedDate = date.format("YYYYMMDD_HHmmss");
     try {
         var res = UrlFetchApp.fetch(CONTENT_END_POINT, {
@@ -34,7 +32,7 @@ function getImage(CONTENT_END_POINT: any, replyToken: string, userID: string) {
 function saveImage(imageBlob: any, replyToken: string) {
     try {
         var folder = DriveApp.getFolderById(GOOGLE_DRIVE_FOLDER_ID);
-        // var file = folder.createFile(imageBlob);
+        folder.createFile(imageBlob);
         var saveText = createMessage(
             "「" + folder.getName() + "」にファイルを保存しました"
         );
