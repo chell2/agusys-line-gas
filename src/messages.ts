@@ -34,6 +34,23 @@ function createMessage(text: string) {
 }
 
 /*
+ * スタンプメッセージの生成
+ * replyToken：応答トークン
+ * messages：応答メッセージ
+ */
+function createSticker() {
+    var messages = [
+        {
+            type: "sticker",
+            packageId: "789",
+            stickerId: "10874",
+        },
+    ];
+
+    return messages;
+}
+
+/*
  * ボタンテンプレートメッセージの生成（被災状況の報告）
  * replyToken：応答トークン
  * messages：応答メッセージ

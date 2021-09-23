@@ -1,10 +1,21 @@
 /*
  * 画像・動画を取得（Blob形式）
  */
-function getImage(CONTENT_END_POINT: any, replyToken: string, userID: string) {
-    //ファイル名に使う現在日時をdayjsライブラリで取得
-    var date = dayjs.dayjs();
-    var formattedDate = date.format("YYYYMMDD_HHmmss");
+function getImage(
+    CONTENT_END_POINT: any,
+    replyToken: string,
+    userID: string,
+    timeStamp: number
+) {
+    // timeStampの処理
+    var date = new Date(timeStamp);
+    var messageTime =
+        date.getFullYear() +
+        ("0" + (date.getMonth() + 1)).slice(-2) +
+        ("0" + date.getDate()).slice(-2) +
+        ("0" + date.getHours()).slice(-2) +
+        ("0" + date.getMinutes()).slice(-2) +
+        ("0" + date.getSeconds()).slice(-2);
     try {
         var res = UrlFetchApp.fetch(CONTENT_END_POINT, {
             headers: {
@@ -13,13 +24,21 @@ function getImage(CONTENT_END_POINT: any, replyToken: string, userID: string) {
             },
             method: "get",
         });
-        //Blob形式で画像・動画を取得し、ファイル名を設定する
-        //ファイル名: ユーザーID_YYYYMMDD_HHmmss
-        var imageBlob = res.getBlob().setName(userID + "_" + formattedDate);
-        //変数imageBlobとreplyTokenを関数saveImageに渡し、saveImageを起動する
+        // Blob形式で画像・動画を取得し、ファイル名を設定する
+        // ファイル名: timestamp（ミリ秒）ユーザーID（最初の8文字）_応答トークン（最初の8文字）:同時送信に対応
+        var imageBlob = res
+            .getBlob()
+            .setName(
+                messageTime +
+                    "_" +
+                    userID.slice(1, 6) +
+                    "_" +
+                    replyToken.slice(0, 8)
+            );
+        // 変数imageBlobとreplyTokenを関数saveImageに渡し、saveImageを起動する
         saveImage(imageBlob, replyToken);
     } catch (error) {
-        //例外エラーが起きた時にログを残す
+        // 例外エラーが起きた時にログを残す
         Logger.log(error);
         var errorText = createMessage("ファイルを取得できませんでした");
         replyMessage(replyToken, errorText);
@@ -38,7 +57,7 @@ function saveImage(imageBlob: any, replyToken: string) {
         );
         replyMessage(replyToken, saveText);
     } catch (error) {
-        //例外エラーが起きた時にログを残す
+        // 例外エラーが起きた時にログを残す
         Logger.log(error);
         var errorText = createMessage("ファイルを保存できませんでした");
         replyMessage(replyToken, errorText);

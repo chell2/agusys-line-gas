@@ -3,6 +3,8 @@
 const prop = PropertiesService.getScriptProperties().getProperties();
 const CHANNEL_ACCESS_TOKEN = prop.CHANNEL_ACCESS_TOKEN;
 const GOOGLE_DRIVE_FOLDER_ID = prop.GOOGLE_DRIVE_FOLDER_ID;
+// const GOOGLE_DRIVE_FOLDER_ID_D = prop.GOOGLE_DRIVE_FOLDER_ID_D;
+// const GOOGLE_DRIVE_FOLDER_ID_R = prop.GOOGLE_DRIVE_FOLDER_ID_R;
 const SPREADSHEET_ID = prop.SPREADSHEET_ID;
 
 // HTTPリクエスト（エンドポイント）
@@ -29,6 +31,7 @@ function doPost(e: { postData: { contents: string } }) {
         // 応答トークンとユーザーID
         var replyToken = event.replyToken;
         var userID = event.source.userId;
+        var timeStamp = event.timestamp;
 
         // Webhookイベントタイプによる分岐
         if (event.type == "message") {
@@ -43,13 +46,17 @@ function doPost(e: { postData: { contents: string } }) {
                     // テキストメッセージ取得
                     var postText = event.message.text;
                     switch (postText) {
-                        case "被害の報告":
+                        case "被災状況の報告":
                             var replyButtons = createButtonsDamaged();
                             replyMessage(replyToken, replyButtons);
                             break;
-                        case "復旧の確認":
+                        case "復旧後の確認":
                             var replyButtons = createButtonsRestoration();
                             replyMessage(replyToken, replyButtons);
+                            break;
+                        case "あぐしす":
+                            var messages = createSticker();
+                            replyMessage(replyToken, messages);
                             break;
                         default:
                             var replyText =
@@ -75,7 +82,7 @@ function doPost(e: { postData: { contents: string } }) {
                 case "video":
                     var CONTENT_END_POINT =
                         CONTENT_URL + messageId + "/content";
-                    getImage(CONTENT_END_POINT, replyToken, userID);
+                    getImage(CONTENT_END_POINT, replyToken, userID, timeStamp);
                     break;
                 default:
             }
