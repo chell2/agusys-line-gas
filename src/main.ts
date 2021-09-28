@@ -6,6 +6,7 @@ const GOOGLE_DRIVE_FOLDER_ID = prop.GOOGLE_DRIVE_FOLDER_ID;
 // const GOOGLE_DRIVE_FOLDER_ID_D = prop.GOOGLE_DRIVE_FOLDER_ID_D;
 // const GOOGLE_DRIVE_FOLDER_ID_R = prop.GOOGLE_DRIVE_FOLDER_ID_R;
 const SPREADSHEET_ID = prop.SPREADSHEET_ID;
+const SPREADSHEET_PIN_ID = prop.SPREADSHEET_PIN_ID;
 
 // HTTPリクエスト（エンドポイント）
 const REPLY_END_POINT = "https://api.line.me/v2/bot/message/reply";
@@ -45,23 +46,38 @@ function doPost(e: { postData: { contents: string } }) {
                     // テキスト内容別の処理
                     // テキストメッセージ取得
                     var postText = event.message.text;
-                    switch (postText) {
-                        case "被災状況の報告":
-                            var replyButtons = createButtonsDamaged();
-                            replyMessage(replyToken, replyButtons);
-                            break;
-                        case "復旧後の確認":
-                            var replyButtons = createButtonsRestoration();
-                            replyMessage(replyToken, replyButtons);
-                            break;
-                        case "あぐしす":
-                            var messages = createSticker();
-                            replyMessage(replyToken, messages);
-                            break;
-                        default:
-                            var replyText =
-                                createMessage("メニューを選んでください");
-                            replyMessage(replyToken, replyText);
+                    if (~postText.indexOf("緯度")) {
+                        //位置情報（タイトル・住所・緯度・軽度）を取得
+                        var title = event.message.title;
+                        var address = event.message.address;
+                        var latitude = event.message.latitude;
+                        var longitude = event.message.longitude;
+                        recordLocation(
+                            replyToken,
+                            title,
+                            address,
+                            latitude,
+                            longitude
+                        );
+                    } else {
+                        switch (postText) {
+                            case "被災状況の報告":
+                                var replyButtons = createButtonsDamaged();
+                                replyMessage(replyToken, replyButtons);
+                                break;
+                            case "復旧後の確認":
+                                var replyButtons = createButtonsRestoration();
+                                replyMessage(replyToken, replyButtons);
+                                break;
+                            case "あぐしす":
+                                var messages = createSticker();
+                                replyMessage(replyToken, messages);
+                                break;
+                            default:
+                                var replyText =
+                                    createMessage("メニューを選んでください");
+                                replyMessage(replyToken, replyText);
+                        }
                     }
                     break;
                 case "location":
@@ -70,13 +86,8 @@ function doPost(e: { postData: { contents: string } }) {
                     var address = event.message.address;
                     var latitude = event.message.latitude;
                     var longitude = event.message.longitude;
-                    recordLocation(
-                        replyToken,
-                        title,
-                        address,
-                        latitude,
-                        longitude
-                    );
+                    mapSearch(replyToken, latitude, longitude);
+                    break;
                     break;
                 case "image":
                 case "video":
