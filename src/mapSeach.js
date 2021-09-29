@@ -3,13 +3,11 @@
  */
 function mapSearch(replyToken, latitude, longitude) {
     try {
-        var lat = latitude;
-        var lng = longitude;
         var diff = 1 / 1000;
-        var latMin = lat - diff;
-        var latMax = lat + diff;
-        var lngMin = lng - diff;
-        var lngMax = lng + diff;
+        var latMin = latitude - diff;
+        var latMax = latitude + diff;
+        var lonMin = longitude - diff;
+        var lonMax = longitude + diff;
         // 緯度経度範囲検索
         SpreadsheetApp.openById(SPREADSHEET_ID)
             .getSheetByName("log")
@@ -20,12 +18,12 @@ function mapSearch(replyToken, latitude, longitude) {
                     " and C<" +
                     latMax +
                     ") and (B>=" +
-                    lngMin +
+                    lonMin +
                     " and B<" +
-                    lngMax +
+                    lonMax +
                     ')",1)'
             );
-        var numData = SpreadsheetApp.openById(SPREADSHEET_ID)
+        var countNum = SpreadsheetApp.openById(SPREADSHEET_ID)
             .getSheetByName("log")
             .getRange(1, 8)
             .getValue();
@@ -35,7 +33,7 @@ function mapSearch(replyToken, latitude, longitude) {
             .getRange("A:C")
             .getValues();
         var address = new Array();
-        for (var i = 0; i < numData + 1; i++) {
+        for (var i = 0; i < countNum + 1; i++) {
             if (i >= 1) {
                 if (values[i] != null && values[i] != "") {
                     address.push(values[i]);

@@ -1,39 +1,34 @@
 // スクリプトプロパティを読込
 // LINE Messaging APIのチャネルアクセストークン、画像保存フォルダID、スプレッドシートID
-const prop = PropertiesService.getScriptProperties().getProperties();
-const CHANNEL_ACCESS_TOKEN = prop.CHANNEL_ACCESS_TOKEN;
-const GOOGLE_DRIVE_FOLDER_ID = prop.GOOGLE_DRIVE_FOLDER_ID;
+var prop = PropertiesService.getScriptProperties().getProperties();
+var CHANNEL_ACCESS_TOKEN = prop.CHANNEL_ACCESS_TOKEN;
+var GOOGLE_DRIVE_FOLDER_ID = prop.GOOGLE_DRIVE_FOLDER_ID;
 // const GOOGLE_DRIVE_FOLDER_ID_D = prop.GOOGLE_DRIVE_FOLDER_ID_D;
 // const GOOGLE_DRIVE_FOLDER_ID_R = prop.GOOGLE_DRIVE_FOLDER_ID_R;
-const SPREADSHEET_ID = prop.SPREADSHEET_ID;
-const SPREADSHEET_PIN_ID = prop.SPREADSHEET_PIN_ID;
-
+var SPREADSHEET_ID = prop.SPREADSHEET_ID;
+var SPREADSHEET_PIN_ID = prop.SPREADSHEET_PIN_ID;
 // HTTPリクエスト（エンドポイント）
-const REPLY_END_POINT = "https://api.line.me/v2/bot/message/reply";
-const CONTENT_URL = "https://api-data.line.me/v2/bot/message/";
-const LINE_ENDPOINT_PROFILE = "https://api.line.me/v2/bot/profile";
-
+var REPLY_END_POINT = "https://api.line.me/v2/bot/message/reply";
+var CONTENT_URL = "https://api-data.line.me/v2/bot/message/";
+var LINE_ENDPOINT_PROFILE = "https://api.line.me/v2/bot/profile";
 /*
  * POSTリクエスト受信
  * e：受信リクエスト（文字列）
  */
-function doPost(e: { postData: { contents: string } }) {
+function doPost(e) {
     // eがundefinedの場合動作を終了する
     if (typeof e === "undefined") {
         Logger.log("undefined");
         return;
     }
-
     // eをJSONとして解析
     var receiveJSON = JSON.parse(e.postData.contents);
-
     for (var i = 0; i < receiveJSON.events.length; i++) {
         var event = receiveJSON.events[i];
         // 応答トークンとユーザーID
         var replyToken = event.replyToken;
         var userID = event.source.userId;
         var timeStamp = event.timestamp;
-
         // Webhookイベントタイプによる分岐
         if (event.type == "message") {
             //// メッセージ受信の場合
@@ -47,18 +42,7 @@ function doPost(e: { postData: { contents: string } }) {
                     // テキストメッセージ取得
                     var postText = event.message.text;
                     if (~postText.indexOf("緯度")) {
-                        //位置情報（タイトル・住所・緯度・軽度）を取得
-                        var title = event.message.title;
-                        var address = event.message.address;
-                        var latitude = event.message.latitude;
-                        var longitude = event.message.longitude;
-                        recordLocation(
-                            replyToken,
-                            title,
-                            address,
-                            latitude,
-                            longitude
-                        );
+                        recordLocation(replyToken, timeStamp, postText);
                     } else {
                         switch (postText) {
                             case "被災状況の報告":
@@ -81,13 +65,10 @@ function doPost(e: { postData: { contents: string } }) {
                     }
                     break;
                 case "location":
-                    //位置情報（タイトル・住所・緯度・軽度）を取得
-                    var title = event.message.title;
-                    var address = event.message.address;
+                    //位置情報（緯度・経度）を取得
                     var latitude = event.message.latitude;
                     var longitude = event.message.longitude;
                     mapSearch(replyToken, latitude, longitude);
-                    break;
                     break;
                 case "image":
                 case "video":

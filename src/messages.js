@@ -3,7 +3,7 @@
  * replyToken：応答トークン
  * messages：応答メッセージ
  */
-function replyMessage(replyToken: string, messages: object) {
+function replyMessage(replyToken, messages) {
     UrlFetchApp.fetch(REPLY_END_POINT, {
         headers: {
             "Content-Type": "application/json; charset=UTF-8",
@@ -22,17 +22,15 @@ function replyMessage(replyToken: string, messages: object) {
  * replyToken：応答トークン
  * messages：応答メッセージ
  */
-function createMessage(text: string) {
+function createMessage(text) {
     var messages = [
         {
             type: "text",
             text: text,
         },
     ];
-
     return messages;
 }
-
 /*
  * スタンプメッセージの生成
  * replyToken：応答トークン
@@ -46,16 +44,14 @@ function createSticker() {
             stickerId: "10874",
         },
     ];
-
     return messages;
 }
-
 /*
  * ボタンテンプレートメッセージの生成（被災状況の報告）
  * replyToken：応答トークン
  * buttonsDamaged：応答メッセージ
  */
-function createButtonsDamaged(): object {
+function createButtonsDamaged() {
     var buttonsDamaged = [
         {
             type: "template",
@@ -98,13 +94,12 @@ function createButtonsDamaged(): object {
     ];
     return buttonsDamaged;
 }
-
 /*
  * ボタンテンプレートメッセージの生成（復旧後の確認）
  * replyToken：応答トークン
  * buttonsRestoration：応答メッセージ
  */
-function createButtonsRestoration(): object {
+function createButtonsRestoration() {
     var buttonsRestoration = [
         {
             type: "template",
@@ -153,7 +148,7 @@ function createButtonsRestoration(): object {
  * replyToken：応答トークン
  * carouselMessage：応答メッセージ
  */
-function createCarousel(address: string) {
+function createCarousel(address) {
     var carouselMessage = [
         {
             type: "template",
