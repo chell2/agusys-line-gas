@@ -8,14 +8,11 @@ function getImage(
     timeStamp: number
 ) {
     // timeStampの処理
-    var date = new Date(timeStamp);
-    var messageTime =
-        date.getFullYear() +
-        ("0" + (date.getMonth() + 1)).slice(-2) +
-        ("0" + date.getDate()).slice(-2) +
-        ("0" + date.getHours()).slice(-2) +
-        ("0" + date.getMinutes()).slice(-2) +
-        ("0" + date.getSeconds()).slice(-2);
+    var date = Utilities.formatDate(
+        new Date(timeStamp),
+        "Asia/Tokyo",
+        "yyyyMMddHHmm"
+    );
     try {
         var res = UrlFetchApp.fetch(CONTENT_END_POINT, {
             headers: {
@@ -29,11 +26,7 @@ function getImage(
         var imageBlob = res
             .getBlob()
             .setName(
-                messageTime +
-                    "_" +
-                    userID.slice(1, 6) +
-                    "_" +
-                    replyToken.slice(0, 8)
+                date + "_" + userID.slice(1, 6) + "_" + replyToken.slice(0, 8)
             );
         // 変数imageBlobとreplyTokenを関数saveImageに渡し、saveImageを起動する
         saveImage(imageBlob, replyToken);
@@ -52,9 +45,7 @@ function saveImage(imageBlob: any, replyToken: string) {
     try {
         var folder = DriveApp.getFolderById(GOOGLE_DRIVE_FOLDER_ID);
         folder.createFile(imageBlob);
-        var saveText = createMessage(
-            "「" + folder.getName() + "」にファイルを保存しました"
-        );
+        var saveText = createMessage("ファイルを保存しました");
         replyMessage(replyToken, saveText);
     } catch (error) {
         // 例外エラーが起きた時にログを残す
