@@ -15,7 +15,7 @@ var LINE_ENDPOINT_PROFILE = "https://api.line.me/v2/bot/profile";
  * POSTリクエスト受信
  * e：受信リクエスト（文字列）
  */
-function doPost(e) {
+function doPost(e: { postData: { contents: string } }) {
     // eがundefinedの場合動作を終了する
     if (typeof e === "undefined") {
         Logger.log("undefined");

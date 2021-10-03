@@ -3,7 +3,7 @@
  * replyToken：応答トークン
  * messages：応答メッセージ
  */
-function replyMessage(replyToken, messages) {
+function replyMessage(replyToken: string, messages: any) {
     UrlFetchApp.fetch(REPLY_END_POINT, {
         headers: {
             "Content-Type": "application/json; charset=UTF-8",
@@ -22,7 +22,7 @@ function replyMessage(replyToken, messages) {
  * replyToken：応答トークン
  * messages：応答メッセージ
  */
-function createMessage(text) {
+function createMessage(text: string) {
     var messages = [
         {
             type: "text",
@@ -148,7 +148,8 @@ function createButtonsRestoration() {
  * replyToken：応答トークン
  * carouselMessage：応答メッセージ
  */
-function createCarousel(address) {
+function createCarousel(address: any[]) {
+    var actionText = "この農地について記録しますか？";
     var carouselMessage = [
         {
             type: "template",
@@ -160,7 +161,7 @@ function createCarousel(address) {
                         // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=postback", // 画像のURL
                         // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
                         title: address[0][0],
-                        text: "この農地について報告しますか？",
+                        text: actionText,
                         defaultAction: {
                             type: "uri",
                             label: "場所を確認する",
@@ -188,7 +189,7 @@ function createCarousel(address) {
                         // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=message", // 画像のURL
                         // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
                         title: address[1][0],
-                        text: "この農地について報告しますか？",
+                        text: actionText,
                         defaultAction: {
                             type: "uri",
                             label: "場所を確認する",
@@ -216,7 +217,7 @@ function createCarousel(address) {
                         // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
                         // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
                         title: address[2][0],
-                        text: "この農地について報告しますか？",
+                        text: actionText,
                         defaultAction: {
                             type: "uri",
                             label: "場所を確認する",
@@ -244,7 +245,7 @@ function createCarousel(address) {
                         // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
                         // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
                         title: address[3][0],
-                        text: "この農地について報告しますか？",
+                        text: actionText,
                         defaultAction: {
                             type: "uri",
                             label: "場所を確認する",
@@ -272,7 +273,7 @@ function createCarousel(address) {
                         // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
                         // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
                         title: address[4][0],
-                        text: "この農地について報告しますか？",
+                        text: actionText,
                         defaultAction: {
                             type: "uri",
                             label: "場所を確認する",
@@ -300,7 +301,7 @@ function createCarousel(address) {
                         // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
                         // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
                         title: address[5][0],
-                        text: "この農地について報告しますか？",
+                        text: actionText,
                         defaultAction: {
                             type: "uri",
                             label: "場所を確認する",
@@ -328,7 +329,7 @@ function createCarousel(address) {
                         // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
                         // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
                         title: address[6][0],
-                        text: "この農地について報告しますか？",
+                        text: actionText,
                         defaultAction: {
                             type: "uri",
                             label: "場所を確認する",
@@ -356,7 +357,7 @@ function createCarousel(address) {
                         // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
                         // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
                         title: address[7][0],
-                        text: "この農地について報告しますか？",
+                        text: actionText,
                         defaultAction: {
                             type: "uri",
                             label: "場所を確認する",
@@ -384,7 +385,7 @@ function createCarousel(address) {
                         // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
                         // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
                         title: address[8][0],
-                        text: "この農地について報告しますか？",
+                        text: actionText,
                         defaultAction: {
                             type: "uri",
                             label: "場所を確認する",
@@ -412,7 +413,7 @@ function createCarousel(address) {
                         // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
                         // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
                         title: address[9][0],
-                        text: "この農地について報告しますか？",
+                        text: actionText,
                         defaultAction: {
                             type: "uri",
                             label: "場所を確認する",

@@ -1,10 +1,14 @@
 /**
  * 位置情報の処理
  */
-function recordLocation(replyToken, timeStamp, postText) {
+function recordLocation(
+    replyToken: string,
+    timeStamp: number,
+    postText: string
+) {
     try {
         // テキストの処理
-        var postText = postText
+        var geocode = postText
             .replace("緯度:", "")
             .replace("経度:", "")
             .split(/\n/);
@@ -16,7 +20,7 @@ function recordLocation(replyToken, timeStamp, postText) {
         // スプレッドシートに記録
         SpreadsheetApp.openById(SPREADSHEET_ID)
             .getSheetByName("location")
-            .appendRow([date, postText].flat());
+            ?.appendRow([date, geocode].flat());
         // メッセージを返す
         var successMessage = createMessage("農地情報を記録しました");
         replyMessage(replyToken, successMessage);
