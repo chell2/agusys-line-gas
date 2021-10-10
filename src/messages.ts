@@ -148,300 +148,36 @@ function createButtonsRestoration() {
  * replyToken：応答トークン
  * carouselMessage：応答メッセージ
  */
-function createCarousel(address: any[]) {
-    var actionText = "この農地について記録しますか？";
-    var carouselMessage = [
+function createCarousel(option: any[]) {
+    var columnsArr = option.map(function (item) {
+        return {
+            title: item[0],
+            text: "この農地について記録しますか？",
+            defaultAction: {
+                type: "uri",
+                label: "場所を確認する",
+                uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
+            },
+            actions: [
+                {
+                    type: "uri",
+                    label: "場所を確認する",
+                    uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
+                },
+                {
+                    type: "message",
+                    label: "この農地を選択",
+                    text: item[0] + "\n緯度:" + item[2] + "\n経度:" + item[1],
+                },
+            ],
+        };
+    });
+
+    return [
         {
             type: "template",
             altText: "報告する農地を選んでください",
-            template: {
-                type: "carousel",
-                columns: [
-                    {
-                        // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=postback", // 画像のURL
-                        // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
-                        title: address[0][0],
-                        text: actionText,
-                        defaultAction: {
-                            type: "uri",
-                            label: "場所を確認する",
-                            uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                        },
-                        actions: [
-                            {
-                                type: "uri",
-                                label: "場所を確認する",
-                                uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                            },
-                            {
-                                type: "message",
-                                label: "この農地を選択",
-                                text:
-                                    address[0][0] +
-                                    "\n緯度:" +
-                                    address[0][2] +
-                                    "\n経度:" +
-                                    address[0][1],
-                            },
-                        ],
-                    },
-                    {
-                        // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=message", // 画像のURL
-                        // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
-                        title: address[1][0],
-                        text: actionText,
-                        defaultAction: {
-                            type: "uri",
-                            label: "場所を確認する",
-                            uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                        },
-                        actions: [
-                            {
-                                type: "uri",
-                                label: "場所を確認する",
-                                uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                            },
-                            {
-                                type: "message",
-                                label: "この農地を選択",
-                                text:
-                                    address[1][0] +
-                                    "\n緯度:" +
-                                    address[1][2] +
-                                    "\n経度:" +
-                                    address[1][1],
-                            },
-                        ],
-                    },
-                    {
-                        // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
-                        // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
-                        title: address[2][0],
-                        text: actionText,
-                        defaultAction: {
-                            type: "uri",
-                            label: "場所を確認する",
-                            uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                        },
-                        actions: [
-                            {
-                                type: "uri",
-                                label: "場所を確認する",
-                                uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                            },
-                            {
-                                type: "message",
-                                label: "この農地を選択",
-                                text:
-                                    address[2][0] +
-                                    "\n緯度:" +
-                                    address[2][2] +
-                                    "\n経度:" +
-                                    address[2][1],
-                            },
-                        ],
-                    },
-                    {
-                        // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
-                        // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
-                        title: address[3][0],
-                        text: actionText,
-                        defaultAction: {
-                            type: "uri",
-                            label: "場所を確認する",
-                            uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                        },
-                        actions: [
-                            {
-                                type: "uri",
-                                label: "場所を確認する",
-                                uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                            },
-                            {
-                                type: "message",
-                                label: "この農地を選択",
-                                text:
-                                    address[3][0] +
-                                    "\n緯度:" +
-                                    address[3][2] +
-                                    "\n経度:" +
-                                    address[3][1],
-                            },
-                        ],
-                    },
-                    {
-                        // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
-                        // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
-                        title: address[4][0],
-                        text: actionText,
-                        defaultAction: {
-                            type: "uri",
-                            label: "場所を確認する",
-                            uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                        },
-                        actions: [
-                            {
-                                type: "uri",
-                                label: "場所を確認する",
-                                uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                            },
-                            {
-                                type: "message",
-                                label: "この農地を選択",
-                                text:
-                                    address[4][0] +
-                                    "\n緯度:" +
-                                    address[4][2] +
-                                    "\n経度:" +
-                                    address[4][1],
-                            },
-                        ],
-                    },
-                    {
-                        // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
-                        // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
-                        title: address[5][0],
-                        text: actionText,
-                        defaultAction: {
-                            type: "uri",
-                            label: "場所を確認する",
-                            uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                        },
-                        actions: [
-                            {
-                                type: "uri",
-                                label: "場所を確認する",
-                                uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                            },
-                            {
-                                type: "message",
-                                label: "この農地を選択",
-                                text:
-                                    address[5][0] +
-                                    "\n緯度:" +
-                                    address[5][2] +
-                                    "\n経度:" +
-                                    address[5][1],
-                            },
-                        ],
-                    },
-                    {
-                        // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
-                        // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
-                        title: address[6][0],
-                        text: actionText,
-                        defaultAction: {
-                            type: "uri",
-                            label: "場所を確認する",
-                            uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                        },
-                        actions: [
-                            {
-                                type: "uri",
-                                label: "場所を確認する",
-                                uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                            },
-                            {
-                                type: "message",
-                                label: "この農地を選択",
-                                text:
-                                    address[6][0] +
-                                    "\n緯度:" +
-                                    address[6][2] +
-                                    "\n経度:" +
-                                    address[6][1],
-                            },
-                        ],
-                    },
-                    {
-                        // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
-                        // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
-                        title: address[7][0],
-                        text: actionText,
-                        defaultAction: {
-                            type: "uri",
-                            label: "場所を確認する",
-                            uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                        },
-                        actions: [
-                            {
-                                type: "uri",
-                                label: "場所を確認する",
-                                uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                            },
-                            {
-                                type: "message",
-                                label: "この農地を選択",
-                                text:
-                                    address[7][0] +
-                                    "\n緯度:" +
-                                    address[7][2] +
-                                    "\n経度:" +
-                                    address[7][1],
-                            },
-                        ],
-                    },
-                    {
-                        // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
-                        // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
-                        title: address[8][0],
-                        text: actionText,
-                        defaultAction: {
-                            type: "uri",
-                            label: "場所を確認する",
-                            uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                        },
-                        actions: [
-                            {
-                                type: "uri",
-                                label: "場所を確認する",
-                                uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                            },
-                            {
-                                type: "message",
-                                label: "この農地を選択",
-                                text:
-                                    address[8][0] +
-                                    "\n緯度:" +
-                                    address[8][2] +
-                                    "\n経度:" +
-                                    address[8][1],
-                            },
-                        ],
-                    },
-                    {
-                        // "thumbnailImageUrl": "https://placehold.jp/640x480.jpg?text=uri", // 画像のURL
-                        // "imageBackgroundColor": "#FFFFFF", // 画像の背景色
-                        title: address[9][0],
-                        text: actionText,
-                        defaultAction: {
-                            type: "uri",
-                            label: "場所を確認する",
-                            uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                        },
-                        actions: [
-                            {
-                                type: "uri",
-                                label: "場所を確認する",
-                                uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
-                            },
-                            {
-                                type: "message",
-                                label: "この農地を選択",
-                                text:
-                                    address[9][0] +
-                                    "\n緯度:" +
-                                    address[9][2] +
-                                    "\n経度:" +
-                                    address[9][1],
-                            },
-                        ],
-                    },
-                ],
-                imageAspectRatio: "rectangle",
-                imageSize: "cover",
-            },
+            template: { type: "carousel", columns: columnsArr },
         },
     ];
-    return carouselMessage;
 }
