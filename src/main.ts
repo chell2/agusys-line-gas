@@ -35,18 +35,23 @@ function doPost(e: { postData: { contents: string } }) {
             recordLocation(replyToken, timeStamp, postText);
           } else {
             switch (postText) {
-              case "被災状況の報告": // 報告手順(1)
-              case "復旧後の確認":
+              case "被災状況の報告": // 報告手順(1)-1
                 const locationButton = createLocationButton();
                 replyMessage(replyToken, locationButton);
                 break;
-              case "被災写真を送る": // 報告手順(3)-2
+              case "復旧後の確認":
+                const locationButtonR = createLocationButtonRecovery();
+                replyMessage(replyToken, locationButtonR);
+                break;
+              case "被災写真を送る": // 報告手順(2)-1
                 const photoButton = createPhotoButton();
                 replyMessage(replyToken, photoButton);
                 break;
-              case "状況を報告する": // 報告手順(3)-3
+              case "次の操作に進む": // 報告手順(3)-1
                 const reportButton = createReportButton();
                 replyMessage(replyToken, reportButton);
+                break;
+              case "【報告】": // 報告手順(3)-2
                 break;
               case "あぐしす":
                 const sticker = createSticker();
@@ -59,23 +64,19 @@ function doPost(e: { postData: { contents: string } }) {
             }
           }
           break;
-        case "location": // 報告手順(2)-1
+        case "location": // 報告手順(1)-2
           const latitude = event.message.latitude;
           const longitude = event.message.longitude;
           mapSearch(replyToken, latitude, longitude);
           break;
-        case "image": // 報告手順(3)-1
+        case "image": // 報告手順(2)-2
         case "video":
           const CONTENT_END_POINT = CONTENT_URL + messageId + "/content";
           getImage(CONTENT_END_POINT, replyToken, userID, timeStamp);
           break;
-        default:
-          const defaultText = createTextMessage("メニューを選んでください");
-          replyMessage(replyToken, defaultText);
       }
     } else {
-      const defaultText = createTextMessage("メニューを選んでください");
-      replyMessage(replyToken, defaultText);
+      return;
     }
   }
 }

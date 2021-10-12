@@ -20,24 +20,44 @@ function getImage(
       method: "get",
     });
     // replyTokenの使用により同時送信に対応
-    var imageBlob = res
-      .getBlob()
-      .setName(date + "_" + userID.slice(1, 6) + "_" + replyToken.slice(0, 8));
-    saveImage(imageBlob, replyToken);
+    var imageName =
+      date + "_" + userID.slice(1, 6) + "_" + replyToken.slice(0, 8);
+    var imageBlob = res.getBlob().setName(imageName);
+    saveImage(imageName, imageBlob, replyToken);
   } catch (error) {
     var errorText = createTextMessage("ファイルを取得できませんでした");
     replyMessage(replyToken, errorText);
   }
 }
 
-function saveImage(imageBlob: any, replyToken: string) {
+function saveImage(imageName: string, imageBlob: any, replyToken: string) {
   try {
     var folder = DriveApp.getFolderById(GOOGLE_DRIVE_FOLDER_ID);
-    folder.createFile(imageBlob);
+    var file = folder.createFile(imageBlob);
+    recordImage(imageName, file, replyToken);
     var confilmTemplate = createConfilmTemplate();
     replyMessage(replyToken, confilmTemplate);
   } catch (error) {
     var errorText = createTextMessage("ファイルを保存できませんでした");
+    replyMessage(replyToken, errorText);
+  }
+}
+
+function recordImage(imageName: string, file: any, replyToken: string) {
+  try {
+    var imagesSheet =
+      SpreadsheetApp.openById(SPREADSHEET_IMG_ID).getSheetByName("images");
+    var imageId = imagesSheet!.getLastRow() + 2102000000;
+    imagesSheet?.appendRow([
+      "farmId",
+      imageId,
+      imageName,
+      file.getUrl(),
+      file.getId(),
+      '=image("https://drive.google.com/uc?id=' + file.getId() + '")',
+    ]);
+  } catch (error) {
+    var errorText = createTextMessage("ファイルを記録できませんでした");
     replyMessage(replyToken, errorText);
   }
 }
