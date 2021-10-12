@@ -15,11 +15,12 @@ function recordLocation(
       "Asia/Tokyo",
       "yyyy/MM/dd HH:mm"
     );
-    SpreadsheetApp.openById(SPREADSHEET_ID)
-      .getSheetByName("location")
-      ?.appendRow([date, geocode].flat());
-    var successMessage = createTextMessage("農地情報を記録しました");
-    replyMessage(replyToken, successMessage);
+    var farmSheet =
+      SpreadsheetApp.openById(SPREADSHEET_FARM_ID).getSheetByName("farmland");
+    var farmId = farmSheet!.getLastRow() + 2101000000;
+    farmSheet!.appendRow([farmId, geocode, date].flat());
+    var photoButton = createPhotoButton();
+    replyMessage(replyToken, photoButton);
   } catch (error) {
     var errorMessage = createTextMessage("農地情報を記録できませんでした");
     replyMessage(replyToken, errorMessage);

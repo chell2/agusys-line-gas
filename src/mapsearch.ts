@@ -3,7 +3,7 @@
 function mapSearch(replyToken: string, latitude: number, longitude: number) {
   try {
     // 候補数取得セルの設定
-    SpreadsheetApp.openById(SPREADSHEET_ID)
+    SpreadsheetApp.openById(SPREADSHEET_PIN_ID)
       .getSheetByName("log")
       ?.getRange(1, 8)
       .setValue("=counta(B:B)-1");
@@ -14,7 +14,7 @@ function mapSearch(replyToken: string, latitude: number, longitude: number) {
       var latMax = latitude + expand;
       var lonMin = longitude - expand;
       var lonMax = longitude + expand;
-      SpreadsheetApp.openById(SPREADSHEET_ID)
+      SpreadsheetApp.openById(SPREADSHEET_PIN_ID)
         .getSheetByName("log")
         ?.getRange(1, 1)
         .setValue(
@@ -28,11 +28,11 @@ function mapSearch(replyToken: string, latitude: number, longitude: number) {
             lonMax +
             ')",1)'
         );
-      var countNumber = SpreadsheetApp.openById(SPREADSHEET_ID)
+      var countNumber = SpreadsheetApp.openById(SPREADSHEET_PIN_ID)
         .getSheetByName("log")
         ?.getRange(1, 8)
         .getValue();
-      var choices = SpreadsheetApp.openById(SPREADSHEET_ID)
+      var choices = SpreadsheetApp.openById(SPREADSHEET_PIN_ID)
         .getSheetByName("log")
         ?.getRange("A:C")
         .getValues();

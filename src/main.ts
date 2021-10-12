@@ -2,8 +2,9 @@
 const prop = PropertiesService.getScriptProperties().getProperties();
 const CHANNEL_ACCESS_TOKEN = prop.CHANNEL_ACCESS_TOKEN;
 const GOOGLE_DRIVE_FOLDER_ID = prop.GOOGLE_DRIVE_FOLDER_ID;
-const SPREADSHEET_ID = prop.SPREADSHEET_ID;
 const SPREADSHEET_PIN_ID = prop.SPREADSHEET_PIN_ID;
+const SPREADSHEET_FARM_ID = prop.SPREADSHEET_FARM_ID;
+const SPREADSHEET_IMG_ID = prop.SPREADSHEET_IMG_ID;
 
 const REPLY_END_POINT = "https://api.line.me/v2/bot/message/reply";
 const CONTENT_URL = "https://api-data.line.me/v2/bot/message/";
@@ -30,13 +31,22 @@ function doPost(e: { postData: { contents: string } }) {
         case "text":
           const postText = event.message.text;
           if (~postText.indexOf("緯度")) {
+            // 報告手順(2)-2
             recordLocation(replyToken, timeStamp, postText);
           } else {
             switch (postText) {
               case "被災状況の報告": // 報告手順(1)
               case "復旧後の確認":
-                const locationButton = createLocationButton(postText);
+                const locationButton = createLocationButton();
                 replyMessage(replyToken, locationButton);
+                break;
+              case "被災写真を送る": // 報告手順(3)-2
+                const photoButton = createPhotoButton();
+                replyMessage(replyToken, photoButton);
+                break;
+              case "状況を報告する": // 報告手順(3)-3
+                const reportButton = createReportButton();
+                replyMessage(replyToken, reportButton);
                 break;
               case "あぐしす":
                 const sticker = createSticker();
@@ -49,12 +59,12 @@ function doPost(e: { postData: { contents: string } }) {
             }
           }
           break;
-        case "location": // 報告手順(2)
+        case "location": // 報告手順(2)-1
           const latitude = event.message.latitude;
           const longitude = event.message.longitude;
           mapSearch(replyToken, latitude, longitude);
           break;
-        case "image": // 報告手順(3)
+        case "image": // 報告手順(3)-1
         case "video":
           const CONTENT_END_POINT = CONTENT_URL + messageId + "/content";
           getImage(CONTENT_END_POINT, replyToken, userID, timeStamp);

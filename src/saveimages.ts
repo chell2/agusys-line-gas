@@ -34,8 +34,8 @@ function saveImage(imageBlob: any, replyToken: string) {
   try {
     var folder = DriveApp.getFolderById(GOOGLE_DRIVE_FOLDER_ID);
     folder.createFile(imageBlob);
-    var saveText = createTextMessage("ファイルを保存しました");
-    replyMessage(replyToken, saveText);
+    var confilmTemplate = createConfilmTemplate();
+    replyMessage(replyToken, confilmTemplate);
   } catch (error) {
     var errorText = createTextMessage("ファイルを保存できませんでした");
     replyMessage(replyToken, errorText);

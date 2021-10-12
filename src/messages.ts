@@ -23,19 +23,22 @@ function createSticker() {
 
 function createCarouselMessage(options: any[]) {
   var columnsArr = options.map(function (item) {
+    const columnLabel = "場所を確認する";
+    const columnUri =
+      "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing";
     return {
       title: item[0],
       text: "この農地について記録しますか？",
       defaultAction: {
         type: "uri",
-        label: "場所を確認する",
-        uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
+        label: columnLabel,
+        uri: columnUri,
       },
       actions: [
         {
           type: "uri",
-          label: "場所を確認する",
-          uri: "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing",
+          label: columnLabel,
+          uri: columnUri,
         },
         {
           type: "message",
