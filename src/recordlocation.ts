@@ -17,10 +17,9 @@ function recordLocation(
     );
     const farmSheet =
       SpreadsheetApp.openById(SPREADSHEET_FARM_ID).getSheetByName("farmland");
-    const farmId = farmSheet!.getLastRow() + 2101000000;
+    const farmId = farmSheet!.getLastRow() + 1021000000;
     farmSheet!.appendRow([farmId, geocode, date].flat());
-    var photoButton = createPhotoButton();
-    replyMessage(replyToken, photoButton);
+    replyMessage(replyToken, createReportButton(DR));
   } catch (error) {
     const errorMessage = createTextMessage("農地情報を記録できませんでした");
     replyMessage(replyToken, errorMessage);

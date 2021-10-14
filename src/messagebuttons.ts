@@ -1,8 +1,6 @@
-// 報告手順の誘導（被災報告）
+// 報告手順の誘導
 
-var buttonTitle = "被災状況の報告";
-
-function createLocationButton() {
+function createLocationButton(category: string, imageUrl: string) {
   const defaultAction = {
     type: "location",
     label: "位置情報を送る",
@@ -10,11 +8,10 @@ function createLocationButton() {
   const locationButton = [
     {
       type: "template",
-      altText: buttonTitle + "（1）位置情報を送る",
+      altText: category + "（1）位置情報を送る",
       template: {
         type: "buttons",
-        thumbnailImageUrl:
-          "https://github.com/chell2/nodejs-agusys/blob/main/img/1.png?raw=true",
+        thumbnailImageUrl: imageUrl,
         imageAspectRatio: "rectangle",
         imageSize: "cover",
         imageBackgroundColor: "#03989e",
@@ -27,7 +24,32 @@ function createLocationButton() {
   return locationButton;
 }
 
-function createPhotoButton() {
+function createReportButton(category: string) {
+  const defaultAction = {
+    type: "uri",
+    label: "入力フォーム",
+    uri: "https://agusys.herokuapp.com/",
+  };
+  const reportButton = [
+    {
+      type: "template",
+      altText: category + "（2）状況を報告する",
+      template: {
+        type: "buttons",
+        thumbnailImageUrl: "https://agusys.herokuapp.com/img/5.png",
+        imageAspectRatio: "rectangle",
+        imageSize: "cover",
+        imageBackgroundColor: "#03989e",
+        text: "タップすると入力フォームが開きます",
+        defaultAction: defaultAction,
+        actions: [defaultAction],
+      },
+    },
+  ];
+  return reportButton;
+}
+
+function createPhotoButton(category: string) {
   const defaultAction = {
     type: "camera",
     label: "写真を撮る",
@@ -35,11 +57,10 @@ function createPhotoButton() {
   const photoButton = [
     {
       type: "template",
-      altText: buttonTitle + "（2）写真を送る",
+      altText: category + "（3）写真を送る",
       template: {
         type: "buttons",
-        thumbnailImageUrl:
-          "https://github.com/chell2/nodejs-agusys/blob/main/img/3.png?raw=true",
+        thumbnailImageUrl: "https://agusys.herokuapp.com/img/3.png",
         imageAspectRatio: "rectangle",
         imageSize: "cover",
         imageBackgroundColor: "#03989e",
@@ -58,11 +79,11 @@ function createPhotoButton() {
   return photoButton;
 }
 
-function createConfilmTemplate() {
+function createConfilmTemplate(category: string) {
   const confilmTemplate = [
     {
       type: "template",
-      altText: buttonTitle,
+      altText: category,
       template: {
         type: "confirm",
         text: "他にも写真を送りますか？",
@@ -82,30 +103,4 @@ function createConfilmTemplate() {
     },
   ];
   return confilmTemplate;
-}
-
-function createReportButton() {
-  const defaultAction = {
-    type: "message",
-    label: "報告する",
-    text: "【報告】",
-  };
-  const reportButton = [
-    {
-      type: "template",
-      altText: buttonTitle + "（3）状況を報告する",
-      template: {
-        type: "buttons",
-        thumbnailImageUrl:
-          "https://github.com/chell2/nodejs-agusys/blob/main/img/5.png?raw=true",
-        imageAspectRatio: "rectangle",
-        imageSize: "cover",
-        imageBackgroundColor: "#03989e",
-        text: "下記をタップ後に送られたメッセージを記録します",
-        defaultAction: defaultAction,
-        actions: [defaultAction],
-      },
-    },
-  ];
-  return reportButton;
 }

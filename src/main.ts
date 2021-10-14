@@ -10,6 +10,10 @@ const REPLY_END_POINT = "https://api.line.me/v2/bot/message/reply";
 const CONTENT_URL = "https://api-data.line.me/v2/bot/message/";
 const LINE_ENDPOINT_PROFILE = "https://api.line.me/v2/bot/profile";
 
+// category
+const DR = "被災状況の報告"; // DamageReport
+const RC = "復旧後の確認"; // RestorationCheck
+
 // e:受信リクエスト
 function doPost(e: { postData: { contents: string } }) {
   if (typeof e === "undefined") {
@@ -31,28 +35,29 @@ function doPost(e: { postData: { contents: string } }) {
         case "text":
           const postText = event.message.text;
           if (~postText.indexOf("緯度")) {
-            // 報告手順(2)-2
+            // DR-1-3
             recordLocation(replyToken, timeStamp, postText);
           } else {
             switch (postText) {
-              case "被災状況の報告": // 報告手順(1)-1
-                const locationButton = createLocationButton();
-                replyMessage(replyToken, locationButton);
+              case DR: // DR-1-1
+                const DRimageUrl = "https://agusys.herokuapp.com/img/1.png";
+                replyMessage(replyToken, createLocationButton(DR, DRimageUrl));
                 break;
-              case "復旧後の確認":
-                const locationButtonR = createLocationButtonRecovery();
-                replyMessage(replyToken, locationButtonR);
+              case RC: // RC-1-1
+                const RCimageUrl = "https://agusys.herokuapp.com/img/2.png";
+                replyMessage(replyToken, createLocationButton(RC, RCimageUrl));
+              case "【被災報告】": // DR-3-2
                 break;
-              case "被災写真を送る": // 報告手順(2)-1
-                const photoButton = createPhotoButton();
+
+              case "被災写真を送る": // DR-2-1
+                const photoButton = createPhotoButton(DR);
                 replyMessage(replyToken, photoButton);
                 break;
-              case "次の操作に進む": // 報告手順(3)-1
-                const reportButton = createReportButton();
+              case "次の操作に進む": // DR-3-1
+                const reportButton = createReportButton(DR);
                 replyMessage(replyToken, reportButton);
                 break;
-              case "【報告】": // 報告手順(3)-2
-                break;
+
               case "あぐしす":
                 const sticker = createSticker();
                 replyMessage(replyToken, sticker);
@@ -64,7 +69,7 @@ function doPost(e: { postData: { contents: string } }) {
             }
           }
           break;
-        case "location": // 報告手順(1)-2
+        case "location": // DR-1-2
           const latitude = event.message.latitude;
           const longitude = event.message.longitude;
           mapSearch(replyToken, latitude, longitude);
