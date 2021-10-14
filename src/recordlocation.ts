@@ -6,23 +6,23 @@ function recordLocation(
   postText: string
 ) {
   try {
-    var geocode = postText
+    const geocode = postText
       .replace("緯度:", "")
       .replace("経度:", "")
       .split(/\n/);
-    var date = Utilities.formatDate(
+    const date = Utilities.formatDate(
       new Date(timeStamp),
       "Asia/Tokyo",
       "yyyy/MM/dd HH:mm"
     );
-    var farmSheet =
+    const farmSheet =
       SpreadsheetApp.openById(SPREADSHEET_FARM_ID).getSheetByName("farmland");
-    var farmId = farmSheet!.getLastRow() + 2101000000;
+    const farmId = farmSheet!.getLastRow() + 2101000000;
     farmSheet!.appendRow([farmId, geocode, date].flat());
     var photoButton = createPhotoButton();
     replyMessage(replyToken, photoButton);
   } catch (error) {
-    var errorMessage = createTextMessage("農地情報を記録できませんでした");
+    const errorMessage = createTextMessage("農地情報を記録できませんでした");
     replyMessage(replyToken, errorMessage);
   }
 }

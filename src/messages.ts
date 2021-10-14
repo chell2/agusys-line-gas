@@ -22,7 +22,7 @@ function createSticker() {
 }
 
 function createCarouselMessage(options: any[]) {
-  var columnsArr = options.map(function (item) {
+  const columnsArr = options.map(function (item) {
     const columnLabel = "場所を確認する";
     const columnUri =
       "https://www.google.com/maps/d/edit?mid=1v_CsOlVlpnm7okSWUNwXcFq9qsCbnExg&usp=sharing";
