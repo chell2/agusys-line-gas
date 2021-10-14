@@ -18,7 +18,7 @@ function doPost(e: { postData: { contents: string } }) {
   }
   const receiveJSON = JSON.parse(e.postData.contents);
 
-  for (var i = 0; i < receiveJSON.events.length; i++) {
+  for (let i = 0; i < receiveJSON.events.length; i++) {
     const event = receiveJSON.events[i];
     const replyToken = event.replyToken;
     const timeStamp = event.timestamp;
