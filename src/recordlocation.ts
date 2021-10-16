@@ -10,6 +10,7 @@ function recordLocation(
     const geocode = postText
       .replace("緯度:", "")
       .replace("経度:", "")
+      .replace(">>", "")
       .split(/\n/);
     const date = Utilities.formatDate(
       new Date(timeStamp),
