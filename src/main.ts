@@ -15,13 +15,14 @@ const DR = "被災状況の報告"; // DamageReport
 const RC = "復旧後の確認"; // RestorationCheck
 
 // buttonTitleImage
-const titleUrl = "https://agusys.herokuapp.com/buttontitle/";
-// const DR_LOCATION_TITLE
-const RC_LOCATION_TITLE = titleUrl + "2.png";
-const DRinputTitle = "https://agusys.herokuapp.com/buttontitle/3.png";
-const RCinputTitle = titleUrl + "4.png";
-const DRphotoTitle = titleUrl + "5.png";
-const RCphotoTitle = titleUrl + "6.png";
+const titleUrl =
+  "https://github.com/chell2/gas-agusys/blob/main/img/buttontitle/";
+const DRlocationTitle = titleUrl + "1.png?raw=true";
+const RClocationTitle = titleUrl + "2.png?raw=true";
+const DRinputTitle = titleUrl + "3.png?raw=true";
+const RCinputTitle = titleUrl + "4.png?raw=true";
+const DRphotoTitle = titleUrl + "5.png?raw=true";
+const RCphotoTitle = titleUrl + "6.png?raw=true";
 
 // e:受信リクエスト
 function doPost(e: { postData: { contents: string } }) {
@@ -51,14 +52,14 @@ function doPost(e: { postData: { contents: string } }) {
               case DR: // DR1-1
                 const DRlocationButton = createLocationButton(
                   DR,
-                  "https://agusys.herokuapp.com/buttontitle/1.png"
+                  DRlocationTitle
                 );
                 replyMessage(replyToken, DRlocationButton);
                 break;
               case RC: // RC1-1
                 const RClocationButton = createLocationButton(
                   RC,
-                  RC_LOCATION_TITLE
+                  RClocationTitle
                 );
                 replyMessage(replyToken, RClocationButton);
                 break;
@@ -71,7 +72,9 @@ function doPost(e: { postData: { contents: string } }) {
                 replyMessage(replyToken, RCphotoButton);
                 break;
               case "いいえ":
-                const endMessage = createTextMessage("おつかれさまでした");
+                const endMessage = createTextMessage(
+                  "記録を終わります/nおつかれさまでした！"
+                );
                 replyMessage(replyToken, endMessage);
                 break;
               case "あぐしす":
