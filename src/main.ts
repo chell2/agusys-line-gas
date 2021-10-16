@@ -67,7 +67,7 @@ function doPost(e: { postData: { contents: string } }) {
                 const DRphotoButton = createPhotoButton(DR, DRphotoTitle);
                 replyMessage(replyToken, DRphotoButton);
                 break;
-              case ">>復旧写真": // RC3-1
+              case "次の操作に進む\n>>復旧写真": // RC3-1
                 const RCphotoButton = createPhotoButton(RC, RCphotoTitle);
                 replyMessage(replyToken, RCphotoButton);
                 break;
