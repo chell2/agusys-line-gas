@@ -15,15 +15,13 @@ const DR = "被災状況の報告"; // DamageReport
 const RC = "復旧後の確認"; // RestorationCheck
 
 // buttonTitleImage
-const titleUrl =
-  "https://github.com/chell2/gas-agusys/blob/main/img/buttontitle/";
-const DRlocationTitle =
-  "https://github.com/chell2/gas-agusys/blob/main/img/buttontitle/1.png?raw=true";
-const RClocationTitle = titleUrl + "2.png?raw=true";
-const DRinputTitle = titleUrl + "3.png?raw=true";
-const RCinputTitle = titleUrl + "4.png?raw=true";
-const DRphotoTitle = titleUrl + "5.png?raw=true";
-const RCphotoTitle = titleUrl + "6.png?raw=true";
+const titleUrl = "https://agusys.herokuapp.com/buttontitle/";
+const DRlocationTitle = titleUrl + "1.png";
+const RClocationTitle = titleUrl + "2.png";
+const DRinputTitle = titleUrl + "3.png";
+const RCinputTitle = titleUrl + "4.png";
+const DRphotoTitle = titleUrl + "5.png";
+const RCphotoTitle = titleUrl + "6.png";
 
 // e:受信リクエスト
 function doPost(e: { postData: { contents: string } }) {
