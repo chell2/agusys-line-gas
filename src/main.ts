@@ -16,9 +16,9 @@ const RC = "復旧後の確認"; // RestorationCheck
 
 // buttonTitleImage
 const titleUrl = "https://agusys.herokuapp.com/buttontitle/";
-const DRlocationTitle = titleUrl + "1.png";
-const RClocationTitle = titleUrl + "2.png";
-const DRinputTitle = titleUrl + "3.png";
+// const DR_LOCATION_TITLE
+const RC_LOCATION_TITLE = titleUrl + "2.png";
+const DRinputTitle = "https://agusys.herokuapp.com/buttontitle/3.png";
 const RCinputTitle = titleUrl + "4.png";
 const DRphotoTitle = titleUrl + "5.png";
 const RCphotoTitle = titleUrl + "6.png";
@@ -51,14 +51,14 @@ function doPost(e: { postData: { contents: string } }) {
               case DR: // DR1-1
                 const DRlocationButton = createLocationButton(
                   DR,
-                  DRlocationTitle
+                  "https://agusys.herokuapp.com/buttontitle/1.png"
                 );
                 replyMessage(replyToken, DRlocationButton);
                 break;
               case RC: // RC1-1
                 const RClocationButton = createLocationButton(
                   RC,
-                  RClocationTitle
+                  RC_LOCATION_TITLE
                 );
                 replyMessage(replyToken, RClocationButton);
                 break;
