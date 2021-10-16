@@ -73,7 +73,7 @@ function doPost(e: { postData: { contents: string } }) {
                 break;
               case "いいえ":
                 const endMessage = createTextMessage(
-                  "記録を終わります/nおつかれさまでした！"
+                  "記録を終わります\nおつかれさまでした！"
                 );
                 replyMessage(replyToken, endMessage);
                 break;
