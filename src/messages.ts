@@ -44,12 +44,12 @@ function createCarouselMessage(options: any[]) {
         {
           type: "message",
           label: "被災状況を報告する",
-          text: farmAddress + "\n【被災報告】",
+          text: farmAddress + "\n>>被災報告",
         },
         {
           type: "message",
           label: "復旧後の確認を行う",
-          text: farmAddress + "\n【復旧確認】",
+          text: farmAddress + "\n>>復旧確認",
         },
       ],
     };

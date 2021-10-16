@@ -14,6 +14,16 @@ const LINE_ENDPOINT_PROFILE = "https://api.line.me/v2/bot/profile";
 const DR = "被災状況の報告"; // DamageReport
 const RC = "復旧後の確認"; // RestorationCheck
 
+// buttonTitleImage
+const titleUrl =
+  "https://github.com/chell2/liff-agusys/blob/main/public/buttontitle/";
+const DRlocationTitle = titleUrl + "1.png?raw=true";
+const RClocationTitle = titleUrl + "4.png?raw=true";
+const DRinputTitle = titleUrl + "2.png?raw=true";
+const RCinputTitle = titleUrl + "5.png?raw=true";
+const DRphotoTitle = titleUrl + "3.png?raw=true";
+const RCphotoTitle = titleUrl + "6.png?raw=true";
+
 // e:受信リクエスト
 function doPost(e: { postData: { contents: string } }) {
   if (typeof e === "undefined") {
@@ -35,29 +45,36 @@ function doPost(e: { postData: { contents: string } }) {
         case "text":
           const postText = event.message.text;
           if (~postText.indexOf("緯度")) {
-            // DR-1-3
+            // DR1-3,RC1-3
             recordLocation(replyToken, timeStamp, postText);
           } else {
             switch (postText) {
-              case DR: // DR-1-1
-                const DRimageUrl = "https://agusys.herokuapp.com/img/1.png";
-                replyMessage(replyToken, createLocationButton(DR, DRimageUrl));
+              case DR: // DR1-1
+                const DRlocationButton = createLocationButton(
+                  DR,
+                  DRlocationTitle
+                );
+                replyMessage(replyToken, DRlocationButton);
                 break;
-              case RC: // RC-1-1
-                const RCimageUrl = "https://agusys.herokuapp.com/img/2.png";
-                replyMessage(replyToken, createLocationButton(RC, RCimageUrl));
-              case "【被災報告】": // DR-3-2
+              case RC: // RC1-1
+                const RClocationButton = createLocationButton(
+                  RC,
+                  RClocationTitle
+                );
+                replyMessage(replyToken, RClocationButton);
                 break;
-
-              case "被災写真を送る": // DR-2-1
-                const photoButton = createPhotoButton(DR);
-                replyMessage(replyToken, photoButton);
+              case "次の操作に進む\n>>被災写真": // DR3-1
+                const DRphotoButton = createPhotoButton(DR, DRphotoTitle);
+                replyMessage(replyToken, DRphotoButton);
                 break;
-              case "次の操作に進む": // DR-3-1
-                const reportButton = createReportButton(DR);
-                replyMessage(replyToken, reportButton);
+              case ">>復旧写真": // RC3-1
+                const RCphotoButton = createPhotoButton(RC, RCphotoTitle);
+                replyMessage(replyToken, RCphotoButton);
                 break;
-
+              case "いいえ":
+                const endMessage = createTextMessage("おつかれさまでした");
+                replyMessage(replyToken, endMessage);
+                break;
               case "あぐしす":
                 const sticker = createSticker();
                 replyMessage(replyToken, sticker);
@@ -69,7 +86,7 @@ function doPost(e: { postData: { contents: string } }) {
             }
           }
           break;
-        case "location": // DR-1-2
+        case "location": // DR1-2,RC1-2
           const latitude = event.message.latitude;
           const longitude = event.message.longitude;
           mapSearch(replyToken, latitude, longitude);

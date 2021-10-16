@@ -1,5 +1,6 @@
 // 位置情報検索,カルーセルテンプレートのカラム作成
 
+// DR1-2,RC1-2
 function mapSearch(replyToken: string, latitude: number, longitude: number) {
   const logSheet =
     SpreadsheetApp.openById(SPREADSHEET_PIN_ID).getSheetByName("log");

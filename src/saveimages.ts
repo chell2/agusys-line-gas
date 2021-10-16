@@ -34,7 +34,7 @@ function saveImage(imageName: string, imageBlob: any, replyToken: string) {
     const folder = DriveApp.getFolderById(GOOGLE_DRIVE_FOLDER_ID);
     const file = folder.createFile(imageBlob);
     recordImage(imageName, file, replyToken);
-    var confilmTemplate = createConfilmTemplate();
+    var confilmTemplate = createConfilmTemplate(DR);
     replyMessage(replyToken, confilmTemplate);
   } catch (error) {
     const errorText = createTextMessage("ファイルを保存できませんでした");
@@ -46,7 +46,7 @@ function recordImage(imageName: string, file: any, replyToken: string) {
   try {
     const imagesSheet =
       SpreadsheetApp.openById(SPREADSHEET_IMG_ID).getSheetByName("images");
-    const imageId = imagesSheet!.getLastRow() + 2102000000;
+    const imageId = imagesSheet!.getLastRow() + 2021000000;
     imagesSheet?.appendRow([
       "farmId",
       imageId,

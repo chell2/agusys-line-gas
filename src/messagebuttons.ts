@@ -1,5 +1,6 @@
 // 報告手順の誘導
 
+// DR1-1,RC1-1
 function createLocationButton(category: string, imageUrl: string) {
   const defaultAction = {
     type: "location",
@@ -24,32 +25,34 @@ function createLocationButton(category: string, imageUrl: string) {
   return locationButton;
 }
 
-function createReportButton(category: string) {
+// DR2,RC2
+function createInputButton(category: string, imageUrl: string) {
   const defaultAction = {
     type: "uri",
-    label: "入力フォーム",
-    uri: "https://agusys.herokuapp.com/",
+    label: "入力フォームを開く",
+    uri: "https://liff.line.me/1656534914-Y6r6yb3Q",
   };
-  const reportButton = [
+  const inputButton = [
     {
       type: "template",
       altText: category + "（2）状況を報告する",
       template: {
         type: "buttons",
-        thumbnailImageUrl: "https://agusys.herokuapp.com/img/5.png",
+        thumbnailImageUrl: imageUrl,
         imageAspectRatio: "rectangle",
         imageSize: "cover",
         imageBackgroundColor: "#03989e",
-        text: "タップすると入力フォームが開きます",
+        text: "タップして状況を入力してください",
         defaultAction: defaultAction,
         actions: [defaultAction],
       },
     },
   ];
-  return reportButton;
+  return inputButton;
 }
 
-function createPhotoButton(category: string) {
+// DR3,RC3
+function createPhotoButton(category: string, imageUrl: string) {
   const defaultAction = {
     type: "camera",
     label: "写真を撮る",
@@ -60,11 +63,11 @@ function createPhotoButton(category: string) {
       altText: category + "（3）写真を送る",
       template: {
         type: "buttons",
-        thumbnailImageUrl: "https://agusys.herokuapp.com/img/3.png",
+        thumbnailImageUrl: imageUrl,
         imageAspectRatio: "rectangle",
         imageSize: "cover",
         imageBackgroundColor: "#03989e",
-        text: "現地（被災した作物、施設・機械）の状況がわかる写真を送ってください",
+        text: "作物、施設・機械の現在の状況がわかる写真を送ってください",
         defaultAction: defaultAction,
         actions: [
           defaultAction,
@@ -91,12 +94,12 @@ function createConfilmTemplate(category: string) {
           {
             type: "message",
             label: "はい",
-            text: "被災写真を送る",
+            text: "はい",
           },
           {
             type: "message",
             label: "いいえ",
-            text: "次の操作に進む",
+            text: "いいえ",
           },
         ],
       },
