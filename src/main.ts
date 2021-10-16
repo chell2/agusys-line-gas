@@ -16,7 +16,7 @@ const RC = "復旧後の確認"; // RestorationCheck
 
 // buttonTitleImage
 const titleUrl =
-  "https://github.com/chell2/liff-agusys/blob/main/public/buttontitle/";
+  "https://github.com/chell2/gas-agusys/blob/main/img/buttontitle/";
 const DRlocationTitle = titleUrl + "1.png?raw=true";
 const RClocationTitle = titleUrl + "4.png?raw=true";
 const DRinputTitle = titleUrl + "2.png?raw=true";
