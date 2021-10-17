@@ -16,7 +16,7 @@ const RC = "復旧後の確認"; // RestorationCheck
 
 // buttonTitleImage
 const titleUrl =
-  "https://github.com/chell2/gas-agusys/blob/main/img/buttontitle/";
+  "https://github.com/chell2/agusys-line-gas/blob/main/img/buttontitle/";
 const DRlocationTitle = titleUrl + "1.png?raw=true";
 const RClocationTitle = titleUrl + "2.png?raw=true";
 const DRinputTitle = titleUrl + "3.png?raw=true";
