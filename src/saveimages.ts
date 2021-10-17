@@ -1,4 +1,4 @@
-// 写真（動画可）の取得と保存
+// 写真（動画可）の取得と保存、スプレッドシートへの記録
 
 function getImage(
   CONTENT_END_POINT: any,
@@ -31,10 +31,12 @@ function getImage(
 
 function saveImage(imageName: string, imageBlob: any, replyToken: string) {
   try {
-    const folder = DriveApp.getFolderById(GOOGLE_DRIVE_FOLDER_ID);
-    const file = folder.createFile(imageBlob);
-    recordImage(imageName, file, replyToken);
-    var confilmTemplate = createConfilmTemplate(DR);
+    var folderId = getLastUpdatedFolder()[0];
+    var category = getLastUpdatedFolder()[1].slice(-2);
+    var folder = DriveApp.getFolderById(folderId);
+    var file = folder.createFile(imageBlob);
+    recordImage(imageName, file, category, replyToken);
+    var confilmTemplate = createConfilmTemplate(category);
     replyMessage(replyToken, confilmTemplate);
   } catch (error) {
     const errorText = createTextMessage("ファイルを保存できませんでした");
@@ -42,13 +44,26 @@ function saveImage(imageName: string, imageBlob: any, replyToken: string) {
   }
 }
 
-function recordImage(imageName: string, file: any, replyToken: string) {
+function recordImage(
+  imageName: string,
+  file: any,
+  category: string,
+  replyToken: string
+) {
   try {
+    const folderName = getLastUpdatedFolder()[1];
+    if (category == "DR") {
+      var str = "被災報告";
+    } else if (category == "RC") {
+      var str = "復旧確認";
+    }
+    const farmId = folderName.slice(0, -3);
     const imagesSheet =
       SpreadsheetApp.openById(SPREADSHEET_IMG_ID).getSheetByName("images");
-    const imageId = imagesSheet!.getLastRow() + 2021000000;
+    const imageId = imagesSheet!.getLastRow() + 5021000000;
     imagesSheet?.appendRow([
-      "farmId",
+      farmId,
+      str!,
       imageId,
       imageName,
       file.getUrl(),

@@ -1,6 +1,5 @@
 // 位置情報検索,カルーセルテンプレートのカラム作成
 
-// DR1-2,RC1-2
 function mapSearch(replyToken: string, latitude: number, longitude: number) {
   const logSheet =
     SpreadsheetApp.openById(SPREADSHEET_PIN_ID).getSheetByName("log");
@@ -42,7 +41,7 @@ function mapSearch(replyToken: string, latitude: number, longitude: number) {
       // 検索範囲の拡大
       expand = expand * 2;
     } while (countNumber < 10);
-    // カラム数上限10:近距離候補から選出
+    // テンプレートのカラム数上限10,近距離候補から選出
     const x = Math.floor(countNumber / 2) - 4;
     const options = farmAddressArr.splice(x, 10);
     const carouselMessage = createCarouselMessage(options);

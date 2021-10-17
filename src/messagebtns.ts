@@ -1,6 +1,5 @@
-// 報告手順の誘導
+// ボタンメッセージによる報告手順の誘導
 
-// DR1-1,RC1-1
 function createLocationButton(category: string, imageUrl: string) {
   const defaultAction = {
     type: "location",
@@ -25,7 +24,6 @@ function createLocationButton(category: string, imageUrl: string) {
   return locationButton;
 }
 
-// DR2,RC2
 function createInputButton(category: string, imageUrl: string) {
   const defaultAction = {
     type: "uri",
@@ -51,8 +49,14 @@ function createInputButton(category: string, imageUrl: string) {
   return inputButton;
 }
 
-// DR3,RC3
 function createPhotoButton(category: string, imageUrl: string) {
+  if (category == DR) {
+    var description =
+      "現地（作物、施設・機械等）の被害状況がわかる写真を送ってください";
+  } else if (category == RC) {
+    var description =
+      "被害にあった施設・機械の復旧後の状況がわかる写真を送ってください";
+  }
   const defaultAction = {
     type: "camera",
     label: "写真を撮る",
@@ -67,7 +71,7 @@ function createPhotoButton(category: string, imageUrl: string) {
         imageAspectRatio: "rectangle",
         imageSize: "cover",
         imageBackgroundColor: "#03989e",
-        text: "作物、施設・機械の現在の状況がわかる写真を送ってください",
+        text: description!,
         defaultAction: defaultAction,
         actions: [
           defaultAction,
@@ -83,6 +87,11 @@ function createPhotoButton(category: string, imageUrl: string) {
 }
 
 function createConfilmTemplate(category: string) {
+  if (category == "DR") {
+    var yes = "被災写真を送る";
+  } else if (category == "RC") {
+    var yes = "復旧写真を送る";
+  }
   const confilmTemplate = [
     {
       type: "template",
@@ -94,7 +103,7 @@ function createConfilmTemplate(category: string) {
           {
             type: "message",
             label: "はい",
-            text: "はい",
+            text: yes!,
           },
           {
             type: "message",
