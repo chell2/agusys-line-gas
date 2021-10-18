@@ -25,10 +25,15 @@ function createLocationButton(category: string, imageUrl: string) {
 }
 
 function createInputButton(category: string, imageUrl: string) {
+  if (category == DR) {
+    var formLink = "https://liff.line.me/1656534914-Y6r6yb3Q";
+  } else if (category == RC) {
+    var formLink = "https://liff.line.me/1656534914-yDK0YljN";
+  }
   const defaultAction = {
     type: "uri",
     label: "入力フォームを開く",
-    uri: "https://liff.line.me/1656534914-Y6r6yb3Q",
+    uri: formLink!,
   };
   const inputButton = [
     {
