@@ -1,4 +1,4 @@
-// 位置情報検索,カルーセルテンプレートのカラム作成
+// 位置情報検索とカルーセルのカラム作成
 
 function mapSearch(replyToken: string, latitude: number, longitude: number) {
   const logSheet =
@@ -41,7 +41,7 @@ function mapSearch(replyToken: string, latitude: number, longitude: number) {
       // 検索範囲の拡大
       expand = expand * 2;
     } while (countNumber < 10);
-    // テンプレートのカラム数上限10,近距離候補から選出
+    // カラム数上限10,近距離候補から選出
     const x = Math.floor(countNumber / 2) - 4;
     const options = farmAddressArr.splice(x, 10);
     const carouselMessage = createCarouselMessage(options);

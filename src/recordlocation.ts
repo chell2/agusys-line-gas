@@ -1,6 +1,5 @@
 // 位置情報の記録
 
-// DR1-3,RC1-3
 function recordLocation(
   replyToken: string,
   timeStamp: number,

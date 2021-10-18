@@ -1,4 +1,4 @@
-// 各種メッセージ作成（テキスト,ステッカー,カルーセル）
+// 各種メッセージ作成（テキスト・ステッカー・カルーセル）
 
 function createTextMessage(text: string) {
   const textMessage = [
