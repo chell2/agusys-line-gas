@@ -2,7 +2,11 @@
 
 // 対象フォルダの検索・作成
 function setupFolder(category: string) {
-  const farmId = "1021000000";
+  const reportSheet =
+    SpreadsheetApp.openById(SPREADSHEET_FARM_ID).getSheetByName("farmland");
+  const lastRow = reportSheet!.getLastRow();
+  const sheetData = reportSheet!.getRange(lastRow, 1, 1, 5).getValues();
+  const farmId = sheetData[0][0];
   if (category == DR) {
     var str = "DR";
   } else if (category == RC) {
