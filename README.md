@@ -2,8 +2,9 @@
 
 ## LINEbot 版あぐしす
 
-{: align="center"}
-![logo](public/images/logo-s.png "agusys")
+<div align="center">
+    <img src="https://github.com/chell2/agusys-next/blob/main/public/images/logo-s.png?raw=true" alt="logo">
+</div>
 
 ### 用途
 
@@ -29,19 +30,13 @@
 ### リンク
 
 - agusys-LIFF
-
+  :seedling: https://agusys-liff.vercel.app/ <br>
   https://github.com/chell2/agusys-liff-react.git
 
-  :seedling: https://agusys-liff.vercel.app/
-
 - GAS→LIFF へのエンドポイント
-
+  :seedling: https://script.google.com/macros/s/AKfycbzaVNDgAjKXjQxq1xPIc1FNtnIqrmr6ylRKlHjGnrsWi7gJun5-Xjh11wm4s6L3a-_g/exec <br>
   https://github.com/chell2/agusys-liff-gas.git
 
-  :seedling: https://script.google.com/macros/s/AKfycbzaVNDgAjKXjQxq1xPIc1FNtnIqrmr6ylRKlHjGnrsWi7gJun5-Xjh11wm4s6L3a-_g/exec
-
 - agusys-Web
-
+  :seedling: https://agusys.vercel.app/ <br>
   https://github.com/chell2/agusys-next.git
-
-  :seedling: https://agusys.vercel.app/
