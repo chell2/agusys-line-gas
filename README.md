@@ -2,7 +2,7 @@
 
 ## LINEbot 版あぐしす
 
-<div align="center" width="100px">
+<div align="center">
     <img src="https://github.com/chell2/agusys-next/blob/main/public/images/logo-s.png?raw=true" alt="logo">
 </div>
 
